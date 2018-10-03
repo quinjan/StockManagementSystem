@@ -63,9 +63,12 @@ class Ui_MainWindow(object):
         self.pushButton_7 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_7.setGeometry(QtCore.QRect(170, 70, 121, 31))
         self.pushButton_7.setObjectName("pushButton_7")
-        self.tableView = QtWidgets.QTableView(self.centralwidget)
-        self.tableView.setGeometry(QtCore.QRect(170, 180, 581, 371))
-        self.tableView.setObjectName("tableView")
+        self.pushButton_10 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_10.setGeometry(QtCore.QRect(170, 110, 121, 31))
+        self.pushButton_10.setObjectName("pushButton_10")
+        self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
+        self.tableWidget.setGeometry(QtCore.QRect(170, 180, 517, 371))
+        self.tableWidget.setObjectName("tableWidget")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(170, 20, 361, 31))
         font = QtGui.QFont()
@@ -136,6 +139,7 @@ class Ui_MainWindow(object):
         self.label_6.setText(_translate("MainWindow", "Hard Drinks:"))
         self.pushButton_8.setText(_translate("MainWindow", "ADD"))
         self.pushButton_9.setText(_translate("MainWindow", "Summary"))
+        self.pushButton_10.setText(_translate("MainWindow", "Delete"))
 
 
 if __name__ == "__main__":
