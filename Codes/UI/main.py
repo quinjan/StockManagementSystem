@@ -1,4 +1,5 @@
 import sys
+sys.path.append("../")
 from DA.DataAccess import AccessData
 from PyQt5 import QtCore, QtGui, QtWidgets
 from UI.LoginUI import Ui_LoginWindow
@@ -15,6 +16,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.addDialog = addWindow(self)
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.lineEdit2.setValidator(QtGui.QIntValidator())
         self.data = AccessData()
         self.showSummary()
         self.pushButton.clicked.connect(self.showKitchen)
@@ -26,8 +28,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.pushButton_6.clicked.connect(self.showHardSales)
         self.pushButton_7.clicked.connect(self.addDialog.show)
         self.pushButton_10.clicked.connect(self.delete)
+        self.pushButton_8.clicked.connect(self.addSales)
         
-    
     
     def hideAll(self):
         self.label_4.hide()
@@ -37,6 +39,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tableWidget.hide()
         self.pushButton_8.hide()
         self.pushButton_10.hide()
+        self.lineEdit.hide()
+        self.lineEdit2.hide()
+        self.comboBox.hide()
         
     def showKitchen(self):
         self.hideAll()
@@ -88,6 +93,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.label_5.setText("Quantity: ")
         self.label_3.setText("Kitchen Sales")
         self.pushButton_8.show()
+        self.lineEdit2.show()
+        self.lineEdit2.clear()
+        self.comboBox.show()
+        self.readSalesKitchen()
 
     
     def showColdSales(self):
@@ -98,6 +107,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.label_5.setText("Quantity: ")
         self.label_3.setText("Cold Drink Sales")
         self.pushButton_8.show()
+        self.lineEdit2.show()
+        self.lineEdit2.clear()
+        self.comboBox.show()
+        self.readSalesCold()
         
     def showHardSales(self):
         self.hideAll()
@@ -107,6 +120,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.label_5.setText("Quantity: ")
         self.label_3.setText("Hard Drink Sales")
         self.pushButton_8.show()
+        self.lineEdit2.show()
+        self.lineEdit2.clear()
+        self.comboBox.show()
+        self.readSalesHard()
         
     def readKitchen(self):
         self.dataRead = self.data.readKitchen()
@@ -149,7 +166,47 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.readCold()
         else:
             self.readHard()
+            
+    def readSalesHard(self):
+        self.comboBox.clear()
+        self.dataRead = self.data.readHardSales()
+        self.mylist = [row[0] for row in self.dataRead]
+        self.dataRead = self.data.readHardSales()
+        self.mylistSales = [row[1] for row in self.dataRead]
+        self.comboBox.addItems(self.mylist)
+        self.flag = "Hard"
+        print(self.mylistSales)
 
+    def readSalesCold(self):
+        self.comboBox.clear()
+        self.dataRead = self.data.readColdSales()
+        self.mylist = [row[0] for row in self.dataRead]
+        self.dataRead = self.data.readColdSales()
+        self.mylistSales = [row[1] for row in self.dataRead]
+        self.comboBox.addItems(self.mylist)
+        self.flag = "Cold"
+        print(self.mylistSales)
+        
+    def readSalesKitchen(self):
+        self.comboBox.clear()
+        self.dataRead = self.data.readKitchenSales()
+        self.mylist = [row[0] for row in self.dataRead]
+        self.dataRead = self.data.readKitchenSales()
+        self.mylistSales = [row[1] for row in self.dataRead]
+        self.dataRead = self.data.readKitchenSales()
+        self.mylistStock = [row[2] for row in self.dataRead]
+        self.comboBox.addItems(self.mylist)
+        self.flag = "Kitchen"
+        print(self.mylistStock)
+        
+    def addSales(self):
+        index = self.comboBox.currentIndex()
+        self.mylistSales[index] += int(self.lineEdit2.text())
+        self.mylistStock[index] -= int(self.lineEdit2.text())
+        print(self.mylistStock[index])
+        self.data.writeNewSale(self.mylistSales[index], self.mylistStock[index], self.comboBox.currentText())
+        QMessageBox.about(self, "Sales", "Added " + self.lineEdit2.text() + " Sales!")
+        
 class LoginWindow(QtWidgets.QDialog, Ui_LoginWindow):
     def __init__(self, parent=None):
         QtWidgets.QDialog.__init__(self, parent)
