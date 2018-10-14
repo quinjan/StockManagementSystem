@@ -2,9 +2,9 @@ import sys
 sys.path.append("../../")
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
-from BusinessLogic.items import Items
-from BusinessLogic.users import Users
 from GUI.PythonFile.mainWindow import Ui_MainWindow
+from GUI.PythonFile.LoginUI import Ui_LoginWindow
+from GUI.PythonFile.AddWindow import Ui_Dialog
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
@@ -22,7 +22,15 @@ class LoginWindow(QtWidgets.QDialog, Ui_LoginWindow):
         self.setupUi(self)
         self.setFixedSize(self.size())
 
-if _name_ == "_main_":
+class addWindow(QtWidgets.QDialog, Ui_Dialog):
+    def __init__(self, parent=None):
+        super(addWindow, self).__init__(parent)
+        self.setupUi(self)
+        self.setFixedSize(self.size())
+        self.lineEdit_3.setValidator(QtGui.QIntValidator())
+        self.lineEdit_2.setValidator(QtGui.QDoubleValidator())
+
+if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     main = LoginWindow()
     main.show()
