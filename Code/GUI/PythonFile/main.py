@@ -21,3 +21,9 @@ class LoginWindow(QtWidgets.QDialog, Ui_LoginWindow):
         QtWidgets.QDialog.__init__(self, parent)
         self.setupUi(self)
         self.setFixedSize(self.size())
+
+if _name_ == "_main_":
+    app = QtWidgets.QApplication(sys.argv)
+    main = LoginWindow()
+    main.show()
+    sys.exit(app.exec_())
