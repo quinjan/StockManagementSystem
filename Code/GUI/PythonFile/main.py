@@ -15,4 +15,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.lineEdit2.setValidator(QtGui.QIntValidator())
-
+        
+class LoginWindow(QtWidgets.QDialog, Ui_LoginWindow):
+    def __init__(self, parent=None):
+        QtWidgets.QDialog.__init__(self, parent)
+        self.setupUi(self)
+        self.setFixedSize(self.size())
