@@ -1,0 +1,1 @@
+main.py will be the main controller of all GUI.
