@@ -226,10 +226,10 @@ class addWindow(QtWidgets.QDialog, Ui_Dialog):
         self.setFixedSize(self.size())
         self.lineEdit_3.setValidator(QtGui.QIntValidator())
         self.lineEdit_2.setValidator(QtGui.QDoubleValidator())
-		self.Items = Items()
+        self.Items = Items()
         self.pushButton.clicked.connect(self.write)
-		
-	def write(self):
+    
+    def write(self):
         self.Items.writeKitchen(self.lineEdit.text(),float(self.lineEdit_2.text()),self.parent().flag,int(self.lineEdit_3.text()))
         if (self.parent().flag == "Kitchen"):
             self.parent().readKitchen()
