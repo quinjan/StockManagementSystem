@@ -51,6 +51,8 @@ class Ui_Dialog(object):
         self.pushButton = QtWidgets.QPushButton(Dialog)
         self.pushButton.setGeometry(QtCore.QRect(180, 160, 75, 23))
         self.pushButton.setObjectName("pushButton")
+		self.Items = Items()
+        self.pushButton.clicked.connect(self.write)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -62,6 +64,20 @@ class Ui_Dialog(object):
         self.label_2.setText(_translate("Dialog", "Price:"))
         self.label_3.setText(_translate("Dialog", "Stock:"))
         self.pushButton.setText(_translate("Dialog", "ADD"))
+		
+	def write(self):
+        self.Items.writeKitchen(self.lineEdit.text(),float(self.lineEdit_2.text()),self.parent().flag,int(self.lineEdit_3.text()))
+        if (self.parent().flag == "Kitchen"):
+            self.parent().readKitchen()
+        elif (self.parent().flag == "Cold"):
+            self.parent().readCold()
+        else:
+            self.parent().readHard()
+        QMessageBox.about(self, self.parent().flag, "Add Successful!")
+        self.hide()
+        self.lineEdit.clear()
+        self.lineEdit_2.clear()
+        self.lineEdit_3.clear()
 
 
 if __name__ == "__main__":
