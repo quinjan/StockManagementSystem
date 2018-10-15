@@ -18,6 +18,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.lineEdit2.setValidator(QtGui.QIntValidator())
+        self.Items = Items()
+        self.Items.readItems()
+        self.showSummary()
+        self.pushButton.clicked.connect(self.showKitchen)
+        self.pushButton_2.clicked.connect(self.showCold)
+        self.pushButton_3.clicked.connect(self.showHard)
+        self.pushButton_9.clicked.connect(self.showSummary
         
 class LoginWindow(QtWidgets.QDialog, Ui_LoginWindow):
     def __init__(self, parent=None):
