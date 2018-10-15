@@ -226,6 +226,22 @@ class addWindow(QtWidgets.QDialog, Ui_Dialog):
         self.setFixedSize(self.size())
         self.lineEdit_3.setValidator(QtGui.QIntValidator())
         self.lineEdit_2.setValidator(QtGui.QDoubleValidator())
+		self.Items = Items()
+        self.pushButton.clicked.connect(self.write)
+		
+	def write(self):
+        self.Items.writeKitchen(self.lineEdit.text(),float(self.lineEdit_2.text()),self.parent().flag,int(self.lineEdit_3.text()))
+        if (self.parent().flag == "Kitchen"):
+            self.parent().readKitchen()
+        elif (self.parent().flag == "Cold"):
+            self.parent().readCold()
+        else:
+            self.parent().readHard()
+        QMessageBox.about(self, self.parent().flag, "Add Successful!")
+        self.hide()
+        self.lineEdit.clear()
+        self.lineEdit_2.clear()
+        self.lineEdit_3.clear()
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
