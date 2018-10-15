@@ -24,7 +24,61 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.pushButton.clicked.connect(self.showKitchen)
         self.pushButton_2.clicked.connect(self.showCold)
         self.pushButton_3.clicked.connect(self.showHard)
-        self.pushButton_9.clicked.connect(self.showSummary
+        self.pushButton_9.clicked.connect(self.showSummary)
+    
+    def hideAll(self):
+        self.label_4.hide()
+        self.label_5.hide()
+        self.label_6.hide()
+        self.pushButton_7.hide()
+        self.tableWidget.hide()
+        self.pushButton_8.hide()
+        self.pushButton_10.hide()
+        self.lineEdit.hide()
+        self.lineEdit2.hide()
+        self.comboBox.hide()
+        
+    def showKitchen(self):
+        self.hideAll()
+        self.pushButton_7.show()
+        self.pushButton_10.show()
+        self.tableWidget.show()
+        self.label_3.setText("Kitchen Summary")
+        self.readKitchen()
+        self.addDialog.setWindowTitle(self.label_3.text())
+        self.flag = "Kitchen"
+        
+    def showCold(self):
+        self.hideAll()
+        self.pushButton_7.show()
+        self.pushButton_10.show()
+        self.tableWidget.show()
+        self.label_3.setText("Cold Drinks Summary")
+        self.pushButton_7.setText("Add New Cold Drink")
+        self.readCold()
+        self.addDialog.setWindowTitle(self.label_3.text())
+        self.flag = "Cold"
+    
+    def showHard(self):
+        self.hideAll()
+        self.pushButton_7.show()
+        self.pushButton_10.show()
+        self.tableWidget.show()
+        self.label_3.setText("Hard Drinks Summary")
+        self.pushButton_7.setText("Add New Hard Drink")
+        self.readHard()
+        self.addDialog.setWindowTitle(self.label_3.text())
+        self.flag = "Hard"
+        
+    def showSummary(self):
+        self.hideAll()
+        self.label_4.show()
+        self.label_5.show()
+        self.label_6.show()
+        self.label_3.setText("Admin Summary")
+        self.label_4.setText("Kitchen: " + str(self.Items.countKitchen()))
+        self.label_5.setText("Cold Drink: " + str(self.Items.countCold()))
+        self.label_6.setText("Hard Drink: " + str(self.Items.countHard()))
         
 class LoginWindow(QtWidgets.QDialog, Ui_LoginWindow):
     def __init__(self, parent=None):
