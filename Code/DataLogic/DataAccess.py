@@ -4,7 +4,7 @@ class AccessData(object):
     
     
     def __init__(self):
-        self.connection = sqlite3.connect('../Database/MainDB.db')
+        self.connection = sqlite3.connect('../../Database/MainDB.db')
         self.dl = self.connection.cursor()
         
     def readUser(self):
@@ -22,7 +22,8 @@ class AccessData(object):
     def readCold(self):
         self.items = self.dl.execute('SELECT * FROM Items WHERE Type = "Cold" ')
         return self.items
-        def readHard(self):
+    
+    def readHard(self):
         self.items = self.dl.execute('SELECT * FROM Items WHERE Type = "Hard" ')
         return self.items
     
